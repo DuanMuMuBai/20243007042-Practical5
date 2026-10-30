@@ -12,4 +12,9 @@
     <string name="municipality_image_description">A view of the selected municipality</string>
     <string name="visit_site">Visit site</string>
     <string name="visit_failed">No application is available to open this website.</string>
+
+    <string name="website_beijing">https://english.beijing.gov.cn/</string>
+    <string name="website_shanghai">https://english.shanghai.gov.cn/</string>
+    <string name="website_tianjin">https://en.tj.gov.cn/</string>
+    <string name="website_chongqing">https://english.cq.gov.cn/</string>
 </resources>

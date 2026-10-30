@@ -1,6 +1,9 @@
 package com.example.practicalfive;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,5 +97,28 @@ public class Municipality extends AppCompatActivity {
 
         visitButton.setBackgroundTintList(ColorStateList.valueOf(color));
         visitButton.setTextColor(lightText);
+        visitButton.setOnClickListener(v -> openWebsite());
+    }
+
+    private int websiteResource() {
+        switch (municipalityName) {
+            case "Shanghai":
+                return R.string.website_shanghai;
+            case "Chongqing":
+                return R.string.website_chongqing;
+            case "Tianjin":
+                return R.string.website_tianjin;
+            default:
+                return R.string.website_beijing;
+        }
+    }
+
+    private void openWebsite() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(websiteResource())));
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.visit_failed, Toast.LENGTH_LONG).show();
+        }
     }
 }
