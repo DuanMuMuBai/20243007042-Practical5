@@ -1,3 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Chinese Municipalities</string>
+
+    <string name="main_title">Municipalities in China</string>
+    <string name="main_banner_description">A map of China with the four municipalities marked</string>
+    <string name="input_label">I want to know about:</string>
+    <string name="input_hint">e.g. Beijing</string>
+    <string name="error_empty">Please enter a municipality name.</string>
+    <string name="error_invalid">Unsupported municipality. Try Beijing, Shanghai, Tianjin or Chongqing.</string>
 </resources>
