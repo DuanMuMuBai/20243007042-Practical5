@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +19,13 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MUNICIPALITY = "com.example.practicalfive.extra.MUNICIPALITY";
 
     private EditText municipalityInput;
+    private boolean navigating;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        navigating = false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         municipalityInput = findViewById(R.id.municipalityInput);
         municipalityInput.setOnEditorActionListener((v, actionId, event) -> {
-            boolean goPressed = actionId == EditorInfo.IME_ACTION_GO
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || (event != null
+            boolean goPressed = event != null
+                    ? event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
-                    && event.getAction() == KeyEvent.ACTION_DOWN);
+                    : actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE;
             if (goPressed) {
                 openMunicipality();
                 return true;
@@ -48,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openMunicipality() {
+        if (navigating) {
+            return;
+        }
         municipalityInput.setError(null);
         String input = municipalityInput.getText().toString();
         if (input.trim().isEmpty()) {
@@ -59,9 +69,18 @@ public class MainActivity extends AppCompatActivity {
             showError(getString(R.string.error_invalid));
             return;
         }
+        navigating = true;
         Intent intent = new Intent(this, Municipality.class);
         intent.putExtra(EXTRA_MUNICIPALITY, name);
+        hideKeyboard();
         startActivity(intent);
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (manager != null) {
+            manager.hideSoftInputFromWindow(municipalityInput.getWindowToken(), 0);
+        }
     }
 
     private void showError(String message) {
