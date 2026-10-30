@@ -30,11 +30,11 @@
         <ImageView
             android:id="@+id/bannerImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/main_banner_description"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:src="@drawable/chinese_municipalities" />
 
         <TextView
