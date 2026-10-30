@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +66,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void showError(String message) {
         municipalityInput.setError(message);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
